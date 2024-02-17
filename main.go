@@ -3,6 +3,7 @@ package main
 import (
 	"4kbr/restful-golang/app"
 	"4kbr/restful-golang/controller"
+	"4kbr/restful-golang/exception"
 	"4kbr/restful-golang/helper"
 	"4kbr/restful-golang/repository"
 	"4kbr/restful-golang/service"
@@ -34,6 +35,8 @@ func main() {
 	router.POST("/api/categories", categoryController.Create)
 	router.PUT("/api/categories/:categoryId", categoryController.Update)
 	router.DELETE("/api/categories/:categoryId", categoryController.Delete)
+
+	router.PanicHandler = exception.ErrorHandler
 
 	port := os.Getenv("PORT")
 	if port == "" {
