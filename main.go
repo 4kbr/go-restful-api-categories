@@ -5,6 +5,7 @@ import (
 	"4kbr/restful-golang/controller"
 	"4kbr/restful-golang/exception"
 	"4kbr/restful-golang/helper"
+	"4kbr/restful-golang/middleware"
 	"4kbr/restful-golang/repository"
 	"4kbr/restful-golang/service"
 	"fmt"
@@ -46,7 +47,7 @@ func main() {
 	fmt.Println("Run on http://localhost:" + port)
 	server := http.Server{
 		Addr:    `localhost:` + port,
-		Handler: router,
+		Handler: middleware.NewAuthMiddleWare(router),
 	}
 
 	err = server.ListenAndServe()
