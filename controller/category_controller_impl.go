@@ -42,6 +42,12 @@ func (controller *CategoryControllerImpl) Update(writer http.ResponseWriter, req
 	categoryUpdateRequest := web.CategoryUpdateRequest{}
 	helper.ReadFromRequestBody(request, &categoryUpdateRequest)
 
+	categoryId := params.ByName("categoryId")
+	id, err := strconv.Atoi(categoryId)
+	helper.PanicIfError(err)
+
+	categoryUpdateRequest.Id = id
+
 	categoryResponse := controller.CategoryService.Update(request.Context(), categoryUpdateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,

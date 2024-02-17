@@ -1,3 +1,4 @@
 .vscode
 go-restful-database-connection.session.sql
 .env
+test.http
